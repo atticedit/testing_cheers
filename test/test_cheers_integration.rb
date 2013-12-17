@@ -65,4 +65,14 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_name_ending_in_s
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("hans")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    assert_includes shell_output, "HANS is just GRAND!"
+  end
+
 end
