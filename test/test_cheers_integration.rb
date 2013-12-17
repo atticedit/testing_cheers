@@ -103,7 +103,7 @@ EOS
     assert_includes shell_output, "FELIX is just GRAND!"
   end
 
-    # - - - - - - - uppercase characters - - - - - - - #
+    # - - - - - - - variable case character entry - - - - - - - #
 
   def test_a_name_entered_as_uppercase_characters
     shell_output = ""
@@ -118,6 +118,25 @@ Give me a... B
 Give me an... O
 Give me a... B
 BOB's just GRAND!
+EOS
+    assert_equal expected_output, shell_output
+  end
+
+  def test_a_name_entered_as_variable_case_characters
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("fELIx")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Give me an... F
+Give me an... E
+Give me an... L
+Give me an... I
+Give me an... X
+FELIX is just GRAND!
 EOS
     assert_equal expected_output, shell_output
   end
