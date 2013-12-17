@@ -1,4 +1,5 @@
 anChars = ["A", "E", "F", "H", "I", "L", "M", "N", "O", "R", "S", "X"]
+isChars = ["S", "Z"]
 
 puts "What's your name?"
 name = gets.chomp.upcase
@@ -15,7 +16,7 @@ while i < count do
   i = i + 1
 end
 
-if name[-1] == "S"
+if isChars.include? name[-1]
   verb = " is"
 else
   verb = "\'s"
