@@ -1,8 +1,7 @@
 anChars = ["A", "E", "F", "H", "I", "L", "M", "N", "O", "R", "S", "X"]
 
 puts "What's your name?"
-name = gets.chomp
-name = name.upcase
+name = gets.chomp.upcase
 count = name.length
 
 i = 0
