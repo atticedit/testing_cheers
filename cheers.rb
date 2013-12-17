@@ -1,29 +1,24 @@
-# Build on the results of our in-class exploration to output, for example:
-# Give me an... A
-# Give me a... B
-# Give me a... B
-# Give me a... Y
-# ABBY’s just GRAND!
-# When given the input of “Abby”. Note: the “a” vs. “an”
+anChars = ["A", "E", "F", "H", "I", "L", "M", "N", "O", "R", "S", "X"]
 
 puts "What's your name?"
-name = gets
-puts "Thanks, "+name
-puts "This is where the cheer would go"
-
-
-# mychar = 'a'
-# mychar == 'a' #=> true
-
+name = gets.chomp
+name = name.upcase
 count = name.length
+
 i = 0
 while i < count do
-  puts name[i]
+  if anChars.include? name[i]
+    article = "an"
+  else
+    article = "a"
+  end
+  puts "Give me #{article}... #{name[i]}"
   i = i + 1
 end
 
-puts "Or:"
-
-name.each_char do |char|
-  puts char
+if name[-1] == "S"
+  verb = " is"
+else
+  verb = "\'s"
 end
+  puts "#{name}#{verb} just GRAND!"
