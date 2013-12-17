@@ -48,4 +48,21 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_name_with_characters_that_take_both_a_and_an
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("bob")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Give me a... B
+Give me an... O
+Give me a... B
+BOB's just GRAND!
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end
