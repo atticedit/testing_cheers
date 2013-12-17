@@ -85,4 +85,14 @@ EOS
     assert_includes shell_output, "FRANZ is just GRAND!"
   end
 
+  def test_a_name_ending_in_x
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("felix")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    assert_includes shell_output, "FELIX is just GRAND!"
+  end
+
 end

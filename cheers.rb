@@ -1,5 +1,5 @@
 anChars = ["A", "E", "F", "H", "I", "L", "M", "N", "O", "R", "S", "X"]
-isChars = ["S", "Z"]
+isChars = ["S", "X", "Z"]
 
 puts "What's your name?"
 name = gets.chomp.upcase
