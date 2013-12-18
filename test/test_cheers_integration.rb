@@ -179,4 +179,26 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_name_with_a_hyphen
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("jean-luc")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Give me a... J
+Give me an... E
+Give me an... A
+Give me an... N
+Give me a... -
+Give me an... L
+Give me a... U
+Give me a... C
+JEAN-LUC's just GRAND!
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end
