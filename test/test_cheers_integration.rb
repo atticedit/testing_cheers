@@ -157,4 +157,26 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_name_with_a_space
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("anna mae")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Give me an... A
+Give me an... N
+Give me an... N
+Give me an... A
+
+Give me an... M
+Give me an... A
+Give me an... E
+ANNA MAE's just GRAND!
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end

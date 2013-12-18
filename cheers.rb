@@ -15,7 +15,11 @@ begin
     else
       article = "a"
     end
-    puts "Give me #{article}... #{name[i]}"
+    if name[i] == " "
+      puts
+    else
+      puts "Give me #{article}... #{name[i]}"
+    end
     i += 1
   end
 
