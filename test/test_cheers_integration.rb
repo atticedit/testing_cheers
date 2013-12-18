@@ -141,21 +141,7 @@ EOS
     assert_equal expected_output, shell_output
   end
 
-    # - - - - - - - nonstandard characters - - - - - - - #
-
-  def test_a_name_with_a_zero
-    shell_output = ""
-    IO.popen('ruby cheers.rb', 'r+') do |pipe|
-      pipe.puts("B0B")
-      pipe.close_write
-      shell_output = pipe.read
-    end
-    expected_output = <<EOS
-What's your name?
-Names shouldn't include any numerals
-EOS
-    assert_equal expected_output, shell_output
-  end
+    # - - - - - - - allowed non-alpha characters - - - - - - - #
 
   def test_a_name_with_a_space
     shell_output = ""
@@ -201,21 +187,18 @@ EOS
     assert_equal expected_output, shell_output
   end
 
-  def test_a_name_with_a_non_alphanumeric_character
+    # - - - - - - - disallowed characters - - - - - - - #
+
+  def test_a_blank_input
     shell_output = ""
     IO.popen('ruby cheers.rb', 'r+') do |pipe|
-      pipe.puts("b!lly")
+      pipe.puts("")
       pipe.close_write
       shell_output = pipe.read
     end
     expected_output = <<EOS
 What's your name?
-Give me a... B
-Give me a... !
-Give me an... L
-Give me an... L
-Give me a... Y
-B!LLY's just GRAND!
+Names cannot be blank
 EOS
     assert_equal expected_output, shell_output
   end
@@ -229,29 +212,35 @@ EOS
     end
     expected_output = <<EOS
 What's your name?
-Give me an... F
-Give me an... R
-Give me an... A
-Give me an... N
-Give me a... ç
-Give me an... O
-Give me an... I
-Give me an... S
-FRANçOIS is just GRAND!
+Names cannot include accented characters
 EOS
     assert_equal expected_output, shell_output
   end
 
-  def test_a_blank_input
+  def test_a_name_with_a_zero
     shell_output = ""
     IO.popen('ruby cheers.rb', 'r+') do |pipe|
-      pipe.puts("")
+      pipe.puts("B0B")
       pipe.close_write
       shell_output = pipe.read
     end
     expected_output = <<EOS
 What's your name?
-Names cannot be blank
+Names should only include letters
+EOS
+    assert_equal expected_output, shell_output
+  end
+
+  def test_a_name_with_a_non_alphanumeric_character
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("b!lly")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Names should only include letters
 EOS
     assert_equal expected_output, shell_output
   end

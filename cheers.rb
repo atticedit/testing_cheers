@@ -6,8 +6,13 @@ begin
 
   name = gets.chomp.upcase
 
-  raise ArgumentError.new "Names shouldn't include any numerals" if name.include? "0"
-  raise ArgumentError.new "Names cannot be blank" if name.empty?
+  if name.empty?
+    raise ArgumentError.new "Names cannot be blank"
+  elsif name =~ (/^[[:alpha:]]+$/) and name !~ (/^[[a-zA-Z]]+$/)
+    raise ArgumentError.new "Names cannot include accented characters"
+  elsif name !~ (/^[[a-zA-Z\-\ ]]+$/)
+    raise ArgumentError.new "Names should only include letters"
+  end
 
   i = 0
   while i < name.length do
