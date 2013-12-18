@@ -201,4 +201,23 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_name_with_a_non_alphanumeric_character
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("b!lly")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Give me a... B
+Give me a... !
+Give me an... L
+Give me an... L
+Give me a... Y
+B!LLY's just GRAND!
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end
