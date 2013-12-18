@@ -11,7 +11,7 @@ begin
   elsif name =~ (/^[[:alpha:]]+$/) and name !~ (/^[[a-zA-Z]]+$/)
     raise ArgumentError.new "Names cannot include accented characters"
   elsif name !~ (/^[[a-zA-Z\-\ ]]+$/)
-    raise ArgumentError.new "Names should only include letters"
+    raise ArgumentError.new "Names should only include letters, spaces, or hyphens"
   end
 
   i = 0

@@ -226,12 +226,12 @@ EOS
     end
     expected_output = <<EOS
 What's your name?
-Names should only include letters
+Names should only include letters, spaces, or hyphens
 EOS
     assert_equal expected_output, shell_output
   end
 
-  def test_a_name_with_a_non_alphanumeric_character
+  def test_a_name_with_an_exclamation_point
     shell_output = ""
     IO.popen('ruby cheers.rb', 'r+') do |pipe|
       pipe.puts("b!lly")
@@ -240,7 +240,21 @@ EOS
     end
     expected_output = <<EOS
 What's your name?
-Names should only include letters
+Names should only include letters, spaces, or hyphens
+EOS
+    assert_equal expected_output, shell_output
+  end
+
+  def test_a_name_with_a_delta_symbol
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("bran∆y")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Names should only include letters, spaces, or hyphens
 EOS
     assert_equal expected_output, shell_output
   end
