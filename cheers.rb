@@ -7,6 +7,7 @@ begin
   name = gets.chomp.upcase
 
   raise ArgumentError.new "Names shouldn't include any numerals" if name.include? "0"
+  raise ArgumentError.new "Names cannot be blank" if name.empty?
 
   i = 0
   while i < name.length do

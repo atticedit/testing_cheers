@@ -242,4 +242,18 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_blank_input
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Names cannot be blank
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end
