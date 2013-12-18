@@ -220,4 +220,26 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+  def test_a_name_with_an_accented_character
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("françois")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Give me an... F
+Give me an... R
+Give me an... A
+Give me an... N
+Give me a... ç
+Give me an... O
+Give me an... I
+Give me an... S
+FRANçOIS is just GRAND!
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end
