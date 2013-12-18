@@ -141,4 +141,20 @@ EOS
     assert_equal expected_output, shell_output
   end
 
+    # - - - - - - - nonstandard characters - - - - - - - #
+
+  def test_a_name_with_a_zero
+    shell_output = ""
+    IO.popen('ruby cheers.rb', 'r+') do |pipe|
+      pipe.puts("B0B")
+      pipe.close_write
+      shell_output = pipe.read
+    end
+    expected_output = <<EOS
+What's your name?
+Names shouldn't include any numerals
+EOS
+    assert_equal expected_output, shell_output
+  end
+
 end
